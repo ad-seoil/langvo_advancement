@@ -21,7 +21,6 @@ class Inquiry(models.Model):
         max_length=20,
         # choices=[(category.name, category.value) 으로 인해서 화면단에는 category.name이 db에는 category.value가 저장된다
         choices=[(category.name, category.value) for category in InquiryCategory],
-        default=InquiryCategory.OTHER_BUG.value,
     )
     send_date = models.DateTimeField(auto_now_add=True)
 

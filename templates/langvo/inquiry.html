@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/inquiry.css' %}">
+
+<!-- 배경화면 -->
+<div class="background-1"></div>
+<div class="background-2"></div>
+
+<section class="inquiry-form">
+    <div class="inquiry-from-second">
+        <h1>문의</h1>
+        <p>불편사항을 적어주시면 빠른 시간 내에 답변드리겠습니다.</p>
+        <br><br><br>
+
+        <form action="{% url 'langvo:inquiry_create' %}" method="post">
+            {% csrf_token %}
+            <label for="subject">문의 제목</label>
+            <input type="text" id="subject" name="inqTitle" required>
+            <br>
+
+            <label for="message">문의 내용</label>
+            <textarea id="message" name="inqContent" rows="6" required></textarea>
+            <br>
+
+            <label for="email">답변을 받을 이메일</label>
+            <input type="email" id="email" name="inqEmail" required>
+            <br>
+
+            <label for="type">문의 카테고리</label>
+            <select name="type" id="type" required>
+                <option value="" disabled selected>카테고리를 선택해주세요</option>
+                <option value="abuse">버그 악용 신고</option>
+                <option value="access">로그인이 안돼요</option>
+                <option value="bug">버그가 있어요</option>
+                <option value="purchase">결제 문제가 있어요</option>
+                <option value="deletion">계정 삭제 요청</option>
+                <option value="other">기타</option>
+            </select>
+
+            <div class="btn-container">
+                <button type="submit">보내기</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+{% endblock %}
