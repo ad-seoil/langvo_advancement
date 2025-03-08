@@ -6,7 +6,8 @@ from . import views
 app_name = 'langvo'
 
 urlpatterns = [
-    path('', views.index, name='index'), # config/urls에서 이미 langvo/로 시작하는 url이 매핑되었기 때문에 langvo/ + '' 이 되는 것
+    path('', views.main, name='main'),
+    path('inquiry/list/', views.index, name='index'), # config/urls에서 이미 langvo/로 시작하는 url이 매핑되었기 때문에 langvo/ + '' 이 되는 것
     path('<int:inq_id>/', views.detail, name='detail'), # 문의 상세보기
     path('inquiry/create/', views.create, name='inquiry_create'), # 문의 생성하기
     path('inquiry/success/', views.success, name='inquiry_success'), # 문의 성공페이지
