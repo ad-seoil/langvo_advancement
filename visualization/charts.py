@@ -59,6 +59,8 @@ def inquiry_donut_chart():
     buffer.seek(0)
     image_png = buffer.getvalue()
     buffer.close()
+    
+    plt.close()  # 그래프 닫기
 
     graph = base64.b64encode(image_png).decode('utf-8')
     return graph
@@ -92,6 +94,8 @@ def inquiry_wordcloud():
     buffer.seek(0)
     image_png = buffer.getvalue()
     buffer.close()
+    
+    plt.close()  # 그래프 닫기
 
     # image_png를 base64.b64encode()로 인코딩하여 웹에서 사용 가능하도록 변환
     graph = base64.b64encode(image_png).decode('utf-8')
