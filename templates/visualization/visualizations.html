@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문의 시각화</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/visualizations.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>문의 시각화</h1>
+        <div class="charts-container">
+            <div class="chart" id="donut-chart">
+                <h2>카테고리 별 문의량</h2>
+                <canvas id="donutChart" style="width:100%;"></canvas>
+            </div>
+
+            <div class="wordcloud" id="wordcloud">
+                <h2>가장 많이 등장하는 단어</h2>
+                <img src="data:image/png;base64,{{ wordcloud_graph }}" alt="워드 클라우드">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JSON 형식으로 전달받은 데이터를 파싱
+        const categories = JSON.parse('{{ categories|escapejs }}');  // 안전하게 변환
+        const counts = JSON.parse('{{ counts|escapejs }}');          // 안전하게 변환
+
+        // 도넛형 그래프 생성
+        new Chart("donutChart", {
+            type: "doughnut",
+            data: {
+                labels: categories, // 정렬된 카테고리 이름
+                datasets: [{
+                    backgroundColor: ['#FF5733', '#FFC300', '#33C1FF', '#4CAF50', '#9B59B6', '#7F8C8D'], // 색상 배열
+                    data: counts // 정렬된 카테고리 개수
+                }]
+            },
+            options: {
+                cutoutPercentage: 40, // 구멍 크기를 조절 (기본값은 50)
+            title: {
+                display: true,
+                text: "문의 카테고리 분포" // 그래프 제목
+            }
+        }
+    });
+    </script>
+</body>
+</html>

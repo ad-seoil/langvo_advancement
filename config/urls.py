@@ -20,4 +20,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('langvo/', include('langvo.urls')), # langvo/ 페이지를 요청하면  langvo.urls파일의 매핑 정보를 읽어서 처리
+    path('visualization/', include('visualization.urls')), # visualization으로 시작하는 URL은 모두 visualization.urls를 참조
 ]
