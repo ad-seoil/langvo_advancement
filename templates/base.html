@@ -7,56 +7,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css" href="{% static 'css/setting.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
-    <title>Hello, pybo!</title>
+    <title>Langvo</title>
 </head>
 <body>
 <!-- 기본 템플릿 안에 삽입될 내용 Start -->
-{% block content %}
 <!-- 상단바 전체 박스 -->
 <div id="naviBox">
     <!-- 안쪽 navi박스 + 로고 -->
     <div id="naviBox2">
         <!-- 로고, 프로젝트명 박스 -->
         <div id="logoBox">
-            <!-- <img src="/image/DOGE_Logo.png" alt="DOGE_Logo"> -->
-            <!-- <img src="/static/image/DOGE_Logo.png" alt="DOGE_Logo"> -->
-            <a th:href="@{/doge}">
+            <a href="{% url 'langvo:index' %}">  <!-- 메인 페이지 링크로 수정 -->
                 <p>Langvo</p>
             </a>
-            
         </div>
         <!-- 내비게이션 -->
         <nav id="nav">
             <ul id="menu">
                 <li class="main">
-                    <a th:href="@{/doge}">메인페이지</a>
+                    <a href="{% url 'langvo:index' %}">메인페이지</a>  <!-- 메인페이지 링크로 수정 -->
                 </li>
 
-                <!-- <li class="main"> 
-                    <a href="#">언어</a><i class="fa-solid fa-chevron-down icon"></i>
-                    <ul class="sub">  
-                        <li class="subList"><a href="#">English</a></li>
-                        <li class="subList"><a href="#">한국어</a></li>
-                        <li class="subList"><a href="#">日本語</a></li>
-                    </ul>
-                </li> -->
-
                 <li class="main">
-                    <a th:if="${session.loggedInUser == null}" th:href="@{/login}">로그인</a>
-                    <a th:if="${session.loggedInUser != null}" th:href="@{/logout}">로그아웃</a>
+                    {% if request.user.is_authenticated %}
+                        <a href="#">로그아웃</a>  <!-- 로그아웃 링크 -->
+                    {% else %}
+                        <a href="#">로그인</a>  <!-- 로그인 링크 -->
+                    {% endif %}
                 </li>
                 <li class="main">
-                    <!-- 프로필 페이지로 전송 2025.01.12 HSJ-->
-                    <a th:href="@{/profile}">프로필</a>
+                    <a href="#">프로필</a>  <!-- 프로필 페이지 링크 -->
                 </li>
                 <li class="main">
-                    <!-- 문의 페이지로 전송 2025.01.09 HSJ-->
-                    <a th:href="@{/inquiry}">문의</a>
+                    <a href="{% url 'langvo:inquiry_create' %}">문의</a>  <!-- 문의 페이지 링크 -->
                 </li>
             </ul> <!-- menu 끝 -->
         </nav>  <!-- 내비게이션 끝 -->
-    </div>  <!-- NaviBox2 끝 -->
-</div>  <!-- NaviBox 끝 -->
+    </div>  <!-- naviBox2 끝 -->
+</div>  <!-- naviBox 끝 -->
+{% block content %}
+<!-- 여기서부터는 자식 템플릿 내용이 들어감 -->
 {% endblock %}
 <!-- 기본 템플릿 안에 삽입될 내용 End -->
 </body>

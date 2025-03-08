@@ -5,7 +5,9 @@
     {% for inquiry in inquiry_list %}
         <!-- for 문에 의해 대입된 inquiry객체의 inq_id번호를 출력 -->
         <!-- for 문에 의해 대입된 inquiry객체의 inq_title을 출력 -->
-        <li><a href="/langvo/{{inq_id}}/">{{ inquiry.inq_title }}</a></li>
+        <!-- <li><a href="/langvo/{{inquiry.inq_id}}/">{{ inquiry.inq_title }}</a></li> -->
+        <!-- URL 리팩토링 방지를 위해 name 설정  -->
+        <li><a href="{% url 'langvo:detail' inquiry.inq_id %}">{{ inquiry.inq_title }}</a></li>
     {% endfor %}
     </ul>
 {% else %}

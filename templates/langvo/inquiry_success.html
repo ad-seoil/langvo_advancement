@@ -1,0 +1,18 @@
+{% extends '../base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet", type="text/css" href="{% static 'inquirySuccess.css' %}">
+
+<section class="inquiry-success">
+        
+    <!-- 아이콘 -->
+    <i class="fa-solid fa-check"></i>
+
+    <h1>Thank You</h1>
+    <h2>검토 후 답변 드리겠습니다</h2>
+
+    <!-- 여기에 메인 화면 링크 -->
+    <a href="{% url 'langvo:inquiry_create' %}" class="btn">다시 문의하기</a>
+</section>
+{% endblock %}
